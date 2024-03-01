@@ -28,17 +28,15 @@
 
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script>
-  var lastUpdtTime;
+ var lastUpdtTime;
 	var d;
 	var alertDone = false;
 $(document).ready(function() {
 	getUpdates();
-	getUpdatess();
 	// check for new updates
-	setInterval('getUpdates()',100);
-	setInterval('getUpdatess()',100);
+	setInterval('getUpdates()',1000);
 
-	
+	setInterval('liveTimerUpdtFun()',1000);
 });
 
 function getUpdates() {
@@ -46,7 +44,6 @@ function getUpdates() {
 	$("#entry_id").css('color', '#f44b4b');
 
 	$.getJSON('https://api.thingspeak.com/channels/2445271/feeds/last', function(data) {
-    
 
 			// if the field1 has data update the page
 
@@ -54,6 +51,13 @@ function getUpdates() {
 
 	$("#created_at").html(d.toDateString() + " " + d.toLocaleTimeString()).css("fontSize", 15);
 	$("#entry_id").html(data.entry_id).css("fontSize", 15);
+  $("#entry_id1").html(data.entry_id).css("fontSize", 15);
+  $("#entry_id2").html(data.entry_id).css("fontSize", 15);
+  $("#entry_id3").html(data.entry_id).css("fontSize", 15);
+  $("#entry_id4").html(data.entry_id).css("fontSize", 15);
+  $("#entry_id5").html(data.entry_id).css("fontSize", 15);
+  $("#entry_id6").html(data.entry_id).css("fontSize", 15);
+  $("#entry_id7").html(data.entry_id).css("fontSize", 15);
 
 		if (data.field1!=null){
      $("#field1").html(data.field1).css("fontSize", 15);
@@ -62,6 +66,16 @@ function getUpdates() {
 	$("#field1").html("OFFLINE").css("fontSize", 15);	
 	}
 
+
+  //dummy voltage
+	if (data.field1!=null){
+     $("#field15").html(data.field1).css("fontSize", 15);
+	}
+	else{
+	$("#field15").html("OFFLINE").css("fontSize", 15);	
+	}
+  // end dv
+
 	if (data.field2!=null){
      $("#field2").html(data.field2).css("fontSize", 15);
 	}
@@ -69,26 +83,95 @@ function getUpdates() {
 	$("#field2").html("OFFLINE").css("fontSize", 15);	
 	}
 
+
+  //dummy POWER
+	if (data.field2!=null){
+     $("#field25").html(data.field2).css("fontSize", 15);
+	}
+	else{
+	$("#field25").html("OFFLINE").css("fontSize", 15);	
+	}
+  // end dP
+
+
 		if (data.field3!=null){
      $("#field3").html(data.field3).css("fontSize", 15);
 	}
 	else{
 	$("#field3").html("OFFLINE").css("fontSize", 15);	
 	}
+   //dummy FREQUENCY
+	if (data.field3!=null){
+     $("#field35").html(data.field3).css("fontSize", 15);
+	}
+	else{
+	$("#field35").html("OFFLINE").css("fontSize", 15);	
+	}
+  // end df
+
+		if (data.field4!=null){
+     $("#field4").html(data.field4).css("fontSize", 15);
+	}
+	else{
+	$("#field4").html("OFFLINE").css("fontSize", 15);	
+	}
+  //dummy energy
+
+  if (data.field4!=null){
+     $("#field45").html(data.field4).css("fontSize", 15);
+	}
+	else{
+	$("#field45").html("OFFLINE").css("fontSize", 15);	
+	}
+  //enf de
+
+		if (data.field5!=null){
+     $("#field5").html(data.field5).css("fontSize", 15);
+	}
+	else{
+	$("#field5").html("OFFLINE").css("fontSize", 15);	
+	}
+
+		if (data.field6!=null){
+     $("#field6").html(data.field6).css("fontSize", 15);
+	}
+	else{
+	$("#field6").html("OFFLINE").css("fontSize", 15);	
+	}
+
+		if (data.field7!=null){
+     $("#field7").html(data.field7).css("fontSize", 15);
+	}
+	else{
+	$("#field7").html("OFFLINE").css("fontSize", 15);	
+	}
+		
+	if (data.field8!=null){
+     $("#field8").html(data.field8).css("fontSize", 15);
+	}
+	else{
+	$("#field8").html("OFFLINE").css("fontSize", 15);	
+	}
 
 
-	$("#entry_id").css('color', 'white');
+	$("#entry_id").css('color', 'green');
+  $("#entry_id1").css('color', 'red');
+  $("#entry_id2").css('color', 'green');
+  $("#entry_id3").css('color', 'red');
+  $("#entry_id4").css('color', 'green');
+  $("#entry_id5").css('color', 'red');
+  $("#entry_id6").css('color', 'green');
+  $("#entry_id7").css('color', 'red');
+  
 
 
 
 lastUpdtTime = (new Date()).getTime();
 	}).fail(function() { 
 		$("#entry_id").html("Error while retrieving information!").css("fontSize", 15);
-		$("#entry_id").css('color', '#f44b4b');
+		$("#entry_id").css('color', 'green');
 		});
 }
-
-
 
 function liveTimerUpdtFun() {
 	// drowser requst time past
@@ -384,7 +467,7 @@ function liveTimerUpdtFun() {
             </div>
             <hr class="dark horizontal my-0">
             <div class="card-footer p-3">
-              <p class="mb-0"><span class="text-success text-sm font-weight-bolder">-- </span></p>
+              <p class="mb-0"><span class="text-success text-sm font-weight-bolder">CREATED AT : <span id="created_at" > --- </span> </span> </span></p>
             </div>
           </div>
         </div>
@@ -401,7 +484,7 @@ function liveTimerUpdtFun() {
             </div>
             <hr class="dark horizontal my-0">
             <div class="card-footer p-3">
-              <p class="mb-0"><span class="text-success text-sm font-weight-bolder">-- </span></p>
+              <p class="mb-0"><span class="text-success text-sm font-weight-bolder">  ENTRY ID :  <span id="entry_id" > --- </span>  </p>
             </div>
           </div>
         </div>
@@ -606,7 +689,7 @@ function liveTimerUpdtFun() {
   <script src="./assets/js/plugins/perfect-scrollbar.min.js"></script>
   <script src="./assets/js/plugins/smooth-scrollbar.min.js"></script>
   <script src="./assets/js/plugins/chartjs.min.js"></script>
-  <script>
+  <!-- <script>
     var ctx = document.getElementById("chart-bars").getContext("2d");
 
     new Chart(ctx, {
@@ -861,7 +944,7 @@ function liveTimerUpdtFun() {
       }
       Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
     }
-  </script>
+  </script> -->
   <!-- Github buttons -->
   <script async defer src="https://buttons.github.io/buttons.js"></script>
   <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
